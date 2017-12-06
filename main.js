@@ -1,6 +1,6 @@
-'use strict'; 
+'use strict';
 
-const db = require('./server/db/models')
+const { db } = require('./server/db/models')
 const app = require('./server')
 const PORT = 1337;
 
