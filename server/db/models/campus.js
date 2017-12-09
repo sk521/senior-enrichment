@@ -11,10 +11,7 @@ const Campus = db.define('Campuses', {
   },
   imageUrl: {
     type: Sequelize.STRING,
-    defaultValue: "https://goo.gl/Kj54uW",
-    validate: {
-      isUrl: true
-    }
+    defaultValue: "https://goo.gl/o8v69e"
   },
   description: {
     type: Sequelize.TEXT
@@ -22,4 +19,3 @@ const Campus = db.define('Campuses', {
 })
 
 module.exports = Campus
-

@@ -19,13 +19,13 @@ You are the CTO of the Margaret Hamilton Interplanetary Academy of JavaScript. C
 
 ### The tools
 
-Use at least Sequelize, Express and React when creating this app. This app is small, so just using React is reasonable, but note that without practicing with more frontend libraries you will have a steep learning curve in senior phase. If you are going forward with ***just React*** you will benefit from **deleting all references to React-Redux, Redux and React-Router** (so you don't confuse yourself with trying to use something in half your files and not the other half). 
+Use at least Sequelize, Express and React when creating this app. This app is small, so just using React is reasonable, but note that without practicing with more frontend libraries you will have a steep learning curve in senior phase. If you are going forward with ***just React*** you will benefit from **deleting all references to React-Redux, Redux and React-Router** (so you don't confuse yourself with trying to use something in half your files and not the other half).
 
 If you feel ready, start by incorporating React-Router, Redux and React-Redux (we helped get you started with this!)! If you go this route, it will be great practice and will prepare you **well** for senior phase.
 
 ### DB Design
 
-- Students
+- Students [X]
   * have profile info including:
     * firstName - not empty or null
     * lastName - not empty or null
@@ -34,7 +34,7 @@ If you feel ready, start by incorporating React-Router, Redux and React-Redux (w
   * must have a virtual 'name' field which is the concatenation of firstName and lastName
   * must be assigned to a campus
 
-- Campuses
+- Campuses [X]
   * have profile info including:
     * name - not empty or null
     * imageUrl - default value
@@ -45,19 +45,19 @@ If you feel ready, start by incorporating React-Router, Redux and React-Redux (w
 #### See Wireframes folder for visual
 
 - Navigation: as a user I...
-  * will land on **Home** by default
-  * can navigate to **Campuses** from **Home**
-  * can navigate to **Students** from **Home**
-  * can navigate to view a **Single Campus** from **Campuses**
-  * can navigate to view a **Single Student** from **Students**
-  * can navigate to view a **Single Student** from **Single Campus** (for any student at that campus)
-  * can navigate to view that student's **Single Campus** from **Single Student**
+  * will land on **Home** by default [X]
+  * can navigate to **Campuses** from **Home** [X]
+  * can navigate to **Students** from **Home** [X]
+  * can navigate to view a **Single Campus** from **Campuses** [X]
+  * can navigate to view a **Single Student** from **Students** [X]
+  * can navigate to view a **Single Student** from **Single Campus** (for any student at that campus) [X]
+  * can navigate to view that student's **Single Campus** from **Single Student** [x]
 
 - Views: as a user I...
-  * see a list of all campuses on the **Campuses** view
-  * see a list of all students on the **Students** view
-  * see details about a campus on the **Single Campus** view, including that campus's students
-  * see details about a student on the **Single Student** view, including that student's campus
+  * see a list of all campuses on the **Campuses** view [x]
+  * see a list of all students on the **Students** view [x]
+  * see details about a campus on the **Single Campus** view, including that campus's students [x]
+  * see details about a student on the **Single Student** view, including that student's campus [x]
 
 - Actions: as a user I...
   * can create a campus
@@ -97,7 +97,7 @@ DELETE
 
 ### How to test functionality without a frontend
 - GET: use your browser
-- POST / PUT / DELETE : 
+- POST / PUT / DELETE :
  - CLI (command line interface) with `curl`
    - e.g. `curl -H "Content-Type: application/json" -X POST -d '{"username":"kate","password":"1234"}' http://localhost:3000/api/login`
    - `-H`: headers. `-X`: verb. `-d`: data (must be of the type specified in headers). http://[address]:[port]/[route_path]
