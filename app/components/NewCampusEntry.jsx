@@ -1,39 +1,84 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { writeCampusName, writeCampusUrl, writeCampusDescription } from '../reducers/NewCampusEntry';
+import { addNewCampus } from '../reducers/AllCampus';
 
-function NewCampusEntry(props) {
-  console.log("This is my PROPS: ", props)
+
+function NewCampusEntry (props) {
+  const { newCampusName, newCampusUrl, newCampusDescription, handleSubmit, handleChange } = props;
+
   return (
-    <form onSubmit={props.handleSubmit}>
+    <form onSubmit={handleSubmit}>
       <div className="form-group">
         <label htmlFor="name">Create A Campus</label>
         <input
+          value={newCampusName}
+          onChange={handleChange}
           className="form-control"
           type="text"
-          campus="campusName"
+          name="campusName"
           placeholder="Enter Campus Name"
-          // value={props.NewCampusEntry}
-          // onChange{props.handleChange}
+        />
+        <br></br>
+        <input
+          value={newCampusUrl}
+          onChange={handleChange}
+          className="form-control"
+          type="text"
+          name="campusUrl"
+          placeholder="Enter Campus Url"
+        />
+
+        <input
+          value={newCampusDescription}
+          onChange={handleChange}
+          className="form-control"
+          type="text"
+          name="campusDescription"
+          placeholder="Enter Campus Description"
         />
       </div>
       <div className="form-group">
-        <button type="submit" className="btn btn-default">
+        <button type="submit">
         Create Campus</button>
       </div>
     </form>
-  )
+  );
 }
 
 const mapStateToProps = function(state) {
-  return { NewCampusEntry: state.NewCampusEntry }
-}
+  return {
+    newCampusName: state.newCampusEntry.newCampusName,
+    newCampusUrl: state.newCampusEntry.newCampusUrl,
+    newCampusDescription: state.newCampusEntry.newCampusDescription
+  };
+};
 
 const mapDispatchToProps = function(dispatch, ownProps) {
   return {
-    hangleChange: function(evt) {
-      dispatch(w)
-    }
-  }
-}
+    handleChange: (evt) => {
+      dispatch(writeCampusName(evt.target.value));
+      dispatch(writeCampusUrl(evt.target.value));
+      dispatch(writeCampusDescription(evt.target.value))
+    },
+    handleSubmit:  (evt) => {
+      evt.preventDefault();
+      const name = evt.target.campusName.value;
+      console.log('MY NAME ', name)
+      const url = evt.target.campusUrl.value;
+      console.log('MY URL ', url)
+      const description = evt.target.campusDescription.value;
+      console.log('MY DES ', description)
 
-export default NewCampusEntry;
+      dispatch(addNewCampus({ name: name}, ownProps.history))
+      dispatch(writeCampusName(''));
+      dispatch(writeCampusUrl(''));
+      dispatch(writeCampusDescription(''));
+    }
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(NewCampusEntry);

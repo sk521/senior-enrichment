@@ -7,6 +7,9 @@ import PublicIcon from 'material-ui-icons/Public';
 import HomeIcon from 'material-ui-icons/Home';
 // import Icon from 'material-ui/Icon/';
 
+import AllCampus from './AllCampus';
+
+
 import {MuiThemeProvider, createMuiTheme} from 'material-ui/styles/';
 import indigo from 'material-ui/colors/indigo';
 import blueGrey from 'material-ui/colors/blueGrey';

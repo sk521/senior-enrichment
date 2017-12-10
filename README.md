@@ -60,7 +60,7 @@ If you feel ready, start by incorporating React-Router, Redux and React-Redux (w
   * see details about a student on the **Single Student** view, including that student's campus [x]
 
 - Actions: as a user I...
-  * can create a campus
+  * can create a campus [x]
   * can edit a campus's info, including adding/removing a student to/from that campus
   * can delete a campus
   * can create a student

@@ -2,11 +2,19 @@ import axios from 'axios';
 
 
 // ACTION TYPES
+const GET_STUDENT = 'GET_STUDENT';
 const GET_STUDENTS = 'GET_STUDENTS';
 const CREATE_NEW_STUDENT = 'CREATE_NEW_STUDENT';
 
 
 // ACTION CREATORS
+const getStudent = (student) => {
+  return {
+    type: GET_STUDENT,
+    student
+  }
+}
+
 const getStudents = (students) => {
   return {
     type: GET_STUDENTS,
@@ -36,14 +44,14 @@ export function fetchStudent () {
   }
 }
 
-export function addNewStudent (student) {
+export function addNewStudent (student, history) {
 
   return function thunk (dispatch) {
-    return axios.post('/api/studentId', student)
+    return axios.post('/api/student_route', student)
       .then(res => res.data)
       .then(newStudent => {
-        const action = getStudents(newStudent);
-        dispatch(action);
+        dispatch(getStudent(newStudent));
+        history.push(`/student_route/${newStudent.id}`);
     });
   }
 }
@@ -53,6 +61,9 @@ export function addNewStudent (student) {
 
 const allStudentReducer = (state=[], action) => {
   switch (action.type) {
+
+    case GET_STUDENT:
+      return [...state, action.student];
 
     case GET_STUDENTS:
       return action.students

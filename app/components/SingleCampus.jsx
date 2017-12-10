@@ -8,11 +8,15 @@ function SingleCampus (props) {
   const students = props.students;
   const filteredStudents = students.filter(student => student.CampusId === campusId);
   const campuses = props.campuses;
+
+  console.log("THIS IS MY CAMPUSESFINDER", campuses.find(campus => campus.id === campusId));
+
   const foundCampus = campuses.find(campus => campus.id === campusId);
+
 
   return (
     <div>
-      <h1>{foundCampus.name} Campus</h1>
+      <h1>{campuses.length !== 0 && foundCampus.name} Campus</h1>
       <ul className='student-list'>
       {
         filteredStudents.map(student => {
@@ -29,8 +33,6 @@ function SingleCampus (props) {
     </div>
   )
 }
-
-
 
 
 
