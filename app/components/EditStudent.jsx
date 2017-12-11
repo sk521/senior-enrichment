@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { editNewStudent } from '../reducers/AllStudent';
+import { editStudent } from '../reducers/AllStudent';
 
 
 class EditStudent extends Component {
@@ -14,36 +14,40 @@ class EditStudent extends Component {
       gpa: 0,
       CampusId: 0
     }
-    this.handleChange = this.handleChange.bind(this);
+    this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
+    this.handleChangeLastName = this.handleChangeLastName.bind(this);
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.handleChangeGpa = this.handleChangeGpa.bind(this);
+    this.handleChangeCampusId = this.handleChangeCampusId.bind(this);
   }
 
-  handleChangeFirstName(event) {
+  handleChangeFirstName(evt) {
     this.setState({
-      firstName: event.target.value
+      firstName: evt.target.value
     });
   }
 
-  handleChangeLastName(event) {
+  handleChangeLastName(evt) {
     this.setState({
-      lastName: event.target.value
+      lastName: evt.target.value
     })
   }
 
-  handleChangeEmail(event) {
+  handleChangeEmail(evt) {
     this.setState({
-      email: event.target.value
+      email: evt.target.value
     })
   }
 
-  handleChangeGpa(event) {
+  handleChangeGpa(evt) {
     this.setState({
-      gpa: event.target.value
+      gpa: evt.target.value
     })
   }
 
-  handleChangeCampusId(event) {
+  handleChangeCampusId(evt) {
     this.setState({
-      campusId: event.target.value
+      CampusId: 2
     })
   }
 
@@ -52,11 +56,14 @@ class EditStudent extends Component {
     const { editStudentFirstName, editStudentLastName, editStudentEmail, editStudentGpa, handleSubmit, campuses, students } = this.props;
     const studentId = Number(this.props.match.params.studentId);
     const foundStudent = students.find(student => student.id === studentId);
-    console.log('THIS IS FOUND STUDENT ', foundStudent);
+
 
     return (
       <div>
-        <form onSubmit={handleSubmit(studentId, this.state)}>
+        <form onSubmit={(event) => {
+          event.preventDefault();
+          this.props.handleSubmit(studentId, this.state)
+        }}>
           <div className="form-group">
             <label>First Name</label>
             <input
@@ -64,7 +71,7 @@ class EditStudent extends Component {
               className="form-control"
               type="text"
               name="firstName"
-              placeholder={foundStudent.firstName}
+              placeholder={foundStudent && foundStudent.firstName}
               onChange={this.handleChangeFirstName}
             />
 
@@ -74,7 +81,7 @@ class EditStudent extends Component {
               className="form-control"
               type="text"
               name="lastName"
-              placeholder={foundStudent.lastName}
+              placeholder={foundStudent && foundStudent.lastName}
               onChange={this.handleChangeLastName}
             />
 
@@ -84,7 +91,7 @@ class EditStudent extends Component {
               className="form-control"
               type="text"
               name="email"
-              placeholder={foundStudent.email}
+              placeholder={foundStudent && foundStudent.email}
               onChange={this.handleChangeEmail}
             />
 
@@ -94,7 +101,7 @@ class EditStudent extends Component {
               className="form-control"
               type="integer"
               name="gpa"
-              placeholder={foundStudent.gpa}
+              placeholder={foundStudent && foundStudent.gpa}
               onChange={this.handleChangeGpa}
             />
 
@@ -114,7 +121,6 @@ class EditStudent extends Component {
 }
 
 
-
 const mapStateToProps = function(state) {
   return {
     editStudentFirstName: state.newStudentEntry.editStudentFirstName,
@@ -129,9 +135,9 @@ const mapStateToProps = function(state) {
 
 const mapDispatchToProps = function(dispatch, ownProps) {
   return {
-    handleSubmit: (studentId, newStudentState, evt) => {
-      evt.preventDefault();
-      dispatch(editNewStudent(studentId, newStudentState, ownProps.history));
+    handleSubmit: (studentId, newStudentState) => {
+      console.log("newStudentState:", newStudentState);
+      dispatch(editStudent(studentId, newStudentState, ownProps.history));
     }
   };
 };

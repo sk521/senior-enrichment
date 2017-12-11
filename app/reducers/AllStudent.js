@@ -59,7 +59,14 @@ export function addNewStudent (student, history) {
 
 export function editStudent(studentId, student, history) {
   return function thunk(dispatch) {
-    return axios.put(`api/student_route/${student}`)
+    console.log("IN EDIT STUDENT THUNK");
+    return axios.put(`/api/student_route/${studentId}`, student)
+      .then(res => res.data)
+      .then(updatedStudent => {
+        dispatch(getStudent(updatedStudent));
+        dispatch(fetchStudent());
+        history.push(`/student_route/${updatedStudent.id}`);
+      })
   }
 }
 
@@ -86,3 +93,4 @@ const allStudentReducer = (state=[], action) => {
 }
 
 export default allStudentReducer;
+

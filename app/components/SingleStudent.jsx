@@ -21,7 +21,7 @@ function SingleStudent (props) {
         </NavLink>
 
 
-        <NavLink to={`/editStudent/${foundStudent.id}`}>
+        <NavLink to={`/student_route/${foundStudent.id}/edit`}>
           <button>Edit Student</button>
         </NavLink>
       </ul>

@@ -32,11 +32,11 @@ class Root extends Component {
              <Navbar />
              <main>
               <Switch>
+                <Route path="/student_route/:studentId/edit" component={EditStudent} />
                 <Route path="/campus_route/:campusId" component={SingleCampus} />
                 <Route path="/student_route/:studentId" component={SingleStudent} />
                 <Route path="/newCampusEntry" component={NewCampusEntry} />
                 <Route path="/newStudentEntry" component={NewStudentEntry} />
-                <Route exact path="/editStudent/:studentId" component={EditStudent} />
                 <Route exact path="/campus_route" component={AllCampus} />
                 <Route exact path="/student_route" component={AllStudent} />
                 <Route default path="/" component={Home} />
