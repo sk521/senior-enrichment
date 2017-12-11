@@ -14,8 +14,12 @@ apiRouter.get('/:studentId', (req, res, next) => {
 });
 
 apiRouter.post('/', (req, res, next) => {
+  console.log('entering route',req.body)
   Student.create(req.body)
-    .then(student => res.send(student))
+    .then(student => {
+        console.log('exiting route',student)
+        res.send(student)
+      })
     .catch(next);
 });
 

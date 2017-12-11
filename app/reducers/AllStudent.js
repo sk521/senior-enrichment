@@ -45,16 +45,25 @@ export function fetchStudent () {
 }
 
 export function addNewStudent (student, history) {
-
+  console.log('entering thuk',student)
   return function thunk (dispatch) {
     return axios.post('/api/student_route', student)
       .then(res => res.data)
       .then(newStudent => {
+        console.log('exiting thunk', newStudent)
         dispatch(getStudent(newStudent));
         history.push(`/student_route/${newStudent.id}`);
     });
   }
 }
+
+export function editStudent(studentId, student, history) {
+  return function thunk(dispatch) {
+    return axios.put(`api/student_route/${student}`)
+  }
+}
+
+
 
 
 // REDUCER

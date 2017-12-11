@@ -7,10 +7,10 @@ function SingleStudent (props) {
   const students = props.students;
   const foundStudent = students.find(student => student.id === studentId);
   const campuses = props.campuses;
-  const foundCampus = campuses.find(campus => campus.id === foundStudent.CampusId);
+  const foundCampus = campuses.find(campus => foundStudent.CampusId === campus.id);
 
-
-  return (
+  if (!campuses) return (<div>it didnt go through</div>)
+  else return (
     <div>
       <ul>
         <li>Name: {foundStudent.fullName}</li>
@@ -18,6 +18,11 @@ function SingleStudent (props) {
         <li>GPA: {foundStudent.gpa}</li>
         <NavLink to={`/campus_route/${foundStudent.CampusId}`}>
           <li>Campus: {foundCampus.name}</li>
+        </NavLink>
+
+
+        <NavLink to={`/editStudent/${foundStudent.id}`}>
+          <button>Edit Student</button>
         </NavLink>
       </ul>
     </div>

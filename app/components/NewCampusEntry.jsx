@@ -64,13 +64,10 @@ const mapDispatchToProps = function(dispatch, ownProps) {
     handleSubmit:  (evt) => {
       evt.preventDefault();
       const name = evt.target.campusName.value;
-      console.log('MY NAME ', name)
       const url = evt.target.campusUrl.value;
-      console.log('MY URL ', url)
       const description = evt.target.campusDescription.value;
-      console.log('MY DES ', description)
 
-      dispatch(addNewCampus({ name: name}, ownProps.history))
+      dispatch(addNewCampus({ name: name, url: url, description: description }, ownProps.history));
       dispatch(writeCampusName(''));
       dispatch(writeCampusUrl(''));
       dispatch(writeCampusDescription(''));

@@ -8,9 +8,6 @@ function SingleCampus (props) {
   const students = props.students;
   const filteredStudents = students.filter(student => student.CampusId === campusId);
   const campuses = props.campuses;
-
-  console.log("THIS IS MY CAMPUSESFINDER", campuses.find(campus => campus.id === campusId));
-
   const foundCampus = campuses.find(campus => campus.id === campusId);
 
 
