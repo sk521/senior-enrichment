@@ -61,10 +61,10 @@ If you feel ready, start by incorporating React-Router, Redux and React-Redux (w
 
 - Actions: as a user I...
   * can create a campus [x]
-  * can edit a campus's info, including adding/removing a student to/from that campus
+  * can edit a campus's info, including adding/removing a student to/from that campus [x]
   * can delete a campus
-  * can create a student
-  * can edit a student's info, including the campus that student is assigned to
+  * can create a student [x]
+  * can edit a student's info, including the campus that student is assigned to [x]
   * can delete a student
 
 ### Routes

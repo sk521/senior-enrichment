@@ -21,9 +21,9 @@ apiRouter.post('/', (req, res, next) => {
 
 apiRouter.put('/:campusId', (req, res, next) => {
   const campusId = req.params.campusId;
-
   Campus.findById(campusId)
     .then(campus => campus.update(req.body))
+    .then(updatedCampus => res.json(updatedCampus))
     .catch(next);
 });
 

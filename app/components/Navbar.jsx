@@ -5,7 +5,7 @@ import Tabs, {Tab} from 'material-ui/Tabs';
 import PersonOutlineIcon from 'material-ui-icons/PersonOutline';
 import PublicIcon from 'material-ui-icons/Public';
 import HomeIcon from 'material-ui-icons/Home';
-// import Icon from 'material-ui/Icon/';
+
 
 import AllCampus from './AllCampus';
 

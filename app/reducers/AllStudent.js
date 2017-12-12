@@ -5,6 +5,8 @@ import axios from 'axios';
 const GET_STUDENT = 'GET_STUDENT';
 const GET_STUDENTS = 'GET_STUDENTS';
 const CREATE_NEW_STUDENT = 'CREATE_NEW_STUDENT';
+const EDIT_STUDENT = 'EDIT_STUDENT';
+const DELETE_STUDENT = 'DELETE_STUDENT';
 
 
 // ACTION CREATORS
@@ -28,6 +30,20 @@ const createNewStudent = (newStudent) => {
     newStudent
   };
 };
+
+const updateStudent = (updatedStudent) => {
+  return {
+    type: EDIT_STUDENT,
+    updatedStudent
+  };
+};
+
+const removeStudent = (studentId) => {
+  return {
+    type: DELETE_STUDENT,
+    studentId
+  }
+}
 
 
 // THUNK CREATORS
@@ -57,21 +73,24 @@ export function addNewStudent (student, history) {
   }
 }
 
-export function editStudent(studentId, student, history) {
+export function editStudent(updatedStudent) {
   return function thunk(dispatch) {
-    console.log("IN EDIT STUDENT THUNK");
-    return axios.put(`/api/student_route/${studentId}`, student)
+    return axios.put(`/api/student_route/${updatedStudent.id}`, updatedStudent)
       .then(res => res.data)
-      .then(updatedStudent => {
-        dispatch(getStudent(updatedStudent));
-        dispatch(fetchStudent());
-        history.push(`/student_route/${updatedStudent.id}`);
-      })
+      .then(student =>
+        dispatch(updateStudent(student))
+    );
   }
 }
 
-
-
+export function deleteStudent(studentId) {
+  return function thunk(dispatch) {
+    return axios.delete(`/api/student_route/${studentId}`)
+      .then(() =>
+        dispatch(removeStudent(studentId))
+    );
+  }
+}
 
 // REDUCER
 
@@ -86,6 +105,16 @@ const allStudentReducer = (state=[], action) => {
 
     case CREATE_NEW_STUDENT:
       return action.newStudent
+
+    case EDIT_STUDENT:
+      return state.map(student => student.id !== action.updatedStudent.id ? student : action.updatedStudent);
+
+    case DELETE_STUDENT:
+      return state.filter(student => {
+        if (student.id !== action.studentId) {
+          return student
+      }
+    })
 
     default:
       return state;

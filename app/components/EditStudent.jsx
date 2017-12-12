@@ -4,108 +4,49 @@ import { connect } from 'react-redux';
 import { editStudent } from '../reducers/AllStudent';
 
 
-class EditStudent extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      gpa: 0,
-      CampusId: 0
-    }
-    this.handleChangeFirstName = this.handleChangeFirstName.bind(this);
-    this.handleChangeLastName = this.handleChangeLastName.bind(this);
-    this.handleChangeEmail = this.handleChangeEmail.bind(this);
-    this.handleChangeGpa = this.handleChangeGpa.bind(this);
-    this.handleChangeCampusId = this.handleChangeCampusId.bind(this);
-  }
-
-  handleChangeFirstName(evt) {
-    this.setState({
-      firstName: evt.target.value
-    });
-  }
-
-  handleChangeLastName(evt) {
-    this.setState({
-      lastName: evt.target.value
-    })
-  }
-
-  handleChangeEmail(evt) {
-    this.setState({
-      email: evt.target.value
-    })
-  }
-
-  handleChangeGpa(evt) {
-    this.setState({
-      gpa: evt.target.value
-    })
-  }
-
-  handleChangeCampusId(evt) {
-    this.setState({
-      CampusId: 2
-    })
-  }
-
-
-  render() {
-    const { editStudentFirstName, editStudentLastName, editStudentEmail, editStudentGpa, handleSubmit, campuses, students } = this.props;
-    const studentId = Number(this.props.match.params.studentId);
-    const foundStudent = students.find(student => student.id === studentId);
-
+function EditStudent (props) {
+  const { handleSubmit, campuses, students } = props;
+  const studentId = Number(props.match.params.studentId);
+  const foundStudent = students.find(student => student.id === studentId);
 
     return (
       <div>
-        <form onSubmit={(event) => {
-          event.preventDefault();
-          this.props.handleSubmit(studentId, this.state)
-        }}>
+        <form onSubmit={handleSubmit}>
           <div className="form-group">
+
             <label>First Name</label>
             <input
-              value={this.state.firstName}
               className="form-control"
               type="text"
               name="firstName"
-              placeholder={foundStudent && foundStudent.firstName}
-              onChange={this.handleChangeFirstName}
+              defaultValue={foundStudent.firstName}
             />
 
             <label>Last Name</label>
             <input
-              value={this.state.lastName}
               className="form-control"
               type="text"
               name="lastName"
-              placeholder={foundStudent && foundStudent.lastName}
-              onChange={this.handleChangeLastName}
+              defaultValue={foundStudent.lastName}
             />
 
             <label>Email</label>
             <input
-              value={this.state.email}
               className="form-control"
               type="text"
               name="email"
-              placeholder={foundStudent && foundStudent.email}
-              onChange={this.handleChangeEmail}
+              defaultValue={foundStudent.email}
             />
 
             <label>GPA</label>
             <input
-              value={this.state.gpa}
               className="form-control"
               type="integer"
               name="gpa"
-              placeholder={foundStudent && foundStudent.gpa}
-              onChange={this.handleChangeGpa}
+              defaultValue={foundStudent.gpa}
             />
 
-            <select name='campusId' onChange={this.handleChangeCampusId}>
+            <select name="campus" defaultValue={foundStudent.CampusId}>
             {
               campuses.map(campus => <option key={campus.id} value={campus.id}>{campus.name}</option>)
             }
@@ -118,33 +59,35 @@ class EditStudent extends Component {
       </div>
     )
   }
-}
 
 
 const mapStateToProps = function(state) {
   return {
-    editStudentFirstName: state.newStudentEntry.editStudentFirstName,
-    editStudentLastName: state.newStudentEntry.editStudentLastName,
-    editStudentEmail: state.newStudentEntry.editStudentEmail,
-    editStudentGpa: state.newStudentEntry.editStudentGpa,
-    campuses: state.campuses,
-    students: state.students
+    students: state.students,
+    campuses: state.campuses
   };
 };
 
 
 const mapDispatchToProps = function(dispatch, ownProps) {
+  const studentId = Number(ownProps.match.params.studentId);
+  const history = ownProps.history;
+
   return {
-    handleSubmit: (studentId, newStudentState) => {
-      console.log("newStudentState:", newStudentState);
-      dispatch(editStudent(studentId, newStudentState, ownProps.history));
+    handleSubmit(event) {
+      event.preventDefault();
+      const student = {
+        id: studentId,
+        firstName: event.target.firstName.value,
+        lastName: event.target.lastName.value,
+        email: event.target.email.value,
+        gpa: event.target.gpa.value,
+        CampusId: Number(event.target.campus.value)
+      };
+      dispatch(editStudent(student));
+      history.push('/student_route');
     }
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(EditStudent);
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(EditStudent);

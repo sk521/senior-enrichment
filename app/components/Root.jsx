@@ -13,6 +13,7 @@ import SingleStudent from './SingleStudent';
 import NewCampusEntry from './NewCampusEntry';
 import NewStudentEntry from './NewStudentEntry';
 import EditStudent from './EditStudent';
+import EditCampus from './EditCampus';
 import Home from './Home';
 
 
@@ -32,7 +33,8 @@ class Root extends Component {
              <Navbar />
              <main>
               <Switch>
-                <Route path="/student_route/:studentId/edit" component={EditStudent} />
+                <Route path="/student_route/:studentId/edit_student" component={EditStudent} />
+                <Route path="/campus_route/:campusId/edit_campus" component={EditCampus} />
                 <Route path="/campus_route/:campusId" component={SingleCampus} />
                 <Route path="/student_route/:studentId" component={SingleStudent} />
                 <Route path="/newCampusEntry" component={NewCampusEntry} />
@@ -65,6 +67,3 @@ function mapDispatchToProps (dispatch) {
 
 const RootContainer = connect(null, mapDispatchToProps)(Root);
 export default RootContainer;
-
-
-//withRouter by Connect

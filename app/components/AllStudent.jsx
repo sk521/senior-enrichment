@@ -3,14 +3,7 @@ import Button from 'material-ui/Button';
 import {connect} from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
-// import {fetchStudent} from '../reducers/AllStudent';
-// import {fetchCampus} from '../reducers/AllCampus';
-
 function AllStudent(props) {
-
-  // componentDidMount () {
-  //   this.props.loadStudents();
-  // }
 
   return (
     <div>
@@ -37,15 +30,6 @@ function mapStateToProps ({students}) {
     students
   };
 }
-
-// function mapDispatchToProps (dispatch) {
-//   return {
-//     loadStudents: function () {
-//       dispatch(fetchStudent());
-//       dispatch(fetchCampus());
-//     }
-//   };
-// }
 
 const AllStudentContainer = connect(mapStateToProps)(AllStudent);
 export default AllStudentContainer;
